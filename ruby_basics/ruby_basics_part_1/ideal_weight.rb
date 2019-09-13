@@ -1,12 +1,10 @@
-print "What's your name? "
-name = gets.chomp.capitalize!
-print "What's your height (in cm)? "
+print 'What is your name? '
+name = gets.chomp.capitalize
+print 'What is your height (in cm)? '
 height = gets.to_i
 
-ideal_weight = height - 110
-
-if ideal_weight > 0 
-  puts "Dear #{name}, your ideal weight is #{ideal_weight} kg."
+if height - 110 > 0 
+  puts "Dear #{name}, your ideal weight is #{ height - 110 } kg."
 else
-  puts "Dear #{name}, your weight is already ideal."
+  puts "Dear #{name}, your weight is already ideal. Go eat some bacon:)"
 end

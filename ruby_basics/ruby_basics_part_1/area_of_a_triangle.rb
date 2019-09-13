@@ -1,9 +1,6 @@
-print "Enter a: "
-a = Integer(gets)
-print "Enter h: "
-h = Integer(gets)
+puts 'Enter below a & h: '
+a = gets.to_i
+h = gets.to_i
 
-s = 0.5 * a * h
-
-puts "The area of this triangle is #{s}."
+puts "The area of this triangle is #{ 0.5 * a * h }."
 
