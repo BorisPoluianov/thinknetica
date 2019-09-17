@@ -21,7 +21,8 @@ calculated_days += 1 if leap_year && month > 2
 # Calculating days in previous months
 #####
 
-month - 1 == 0 ? calculated_days += day : calculated_days += months_days.take(month-1).reduce(:+) + day
+calculated_days += day 
+calculated_days += months_days.take(month-1).reduce(0, :+)
 
 #####
 # Output result
