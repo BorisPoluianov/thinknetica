@@ -1,33 +1,29 @@
-basket = Hash.new
-total = 0
+basket = {}
+grand_total = 0
 
 loop do
 
-  puts 'Enter below item, price per item, quantity: '
-  item = gets.chomp.downcase.to_s
+  puts 'Enter below product name, price and quantity: '
+  product_name = gets.chomp.downcase.to_sym
 
-break if item == 'stop'
+  break if product_name == :stop
 
-  price = gets.to_i
-  quantity = gets.to_f
+  entered_price = gets.to_f
+  entered_quantity = gets.to_f
 
-  basket[:"#{item}"] = { 
- 
-    'price': price, 
-    'quantity': quantity 
- 
-  }
+  basket[product_name] = {price: entered_price, quantity: entered_quantity}
 
 end
 
 puts "\nYour basket have: "
 
-basket.each do |key, value|
-
-  puts "#{key.capitalize} - $#{value[:price]} - quantity: #{value[:quantity]} - total per item: $#{value[:price] * value[:quantity]}."
-  total += value[:price] * value[:quantity]
+basket.each do |product_name, product_info|
+  
+  total_per_item = product_info[:price] * product_info[:quantity]
+  puts "#{product_name.capitalize} - $#{product_info[:price]} - quantity: #{product_info[:quantity]} - total per item: $#{total_per_item}."
+  grand_total += product_info[:price] * product_info[:quantity]
 
 end
 
-50.times { print "=" }
-puts "\nGrand total: $#{total}"
+50.times { print '=' }
+puts "\nGrand total: $#{grand_total}"

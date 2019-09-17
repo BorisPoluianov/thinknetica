@@ -1,5 +1,5 @@
-my_array = Array.new
+my_array = []
 
-10.step(100, 5) { |i| my_array << i }
+my_array = (10..100).step(5).to_a
 
-print my_array
+puts my_array

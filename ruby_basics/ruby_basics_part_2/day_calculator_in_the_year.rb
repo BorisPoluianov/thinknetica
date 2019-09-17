@@ -7,30 +7,24 @@ day = gets.to_i
 month = gets.to_i
 year = gets.to_i
 
-months_days = [ 31, 28, 31, 30 , 31, 30 , 31, 31, 30, 31, 30, 31]
+months_days = [31, 28, 31, 30 , 31, 30 , 31, 31, 30, 31, 30, 31]
 
 #####
 # Setting calculated_days to 1 if entered year is a leap year.
 #####
 
-if month > 2 && year % 4 == 0
-  calculated_days = 1
-elsif month > 2 && year % 4 == 0 && year % 100 > 0
-  calculated_days = 1
-elsif month > 2 && year % 4 == 0 && year % 100 == 0 && year % 400 == 0
-  calculated_days = 1 
-else
-  calculated_days = 0
-end
+leap_year = year % 4 == 0 && year % 100 != 0 || year % 400 == 0
+calculated_days = 0
+calculated_days += 1 if leap_year && month > 2
 
 #####
 # Calculating days in previous months
 #####
 
-months_days.take(month-1).each { |i| calculated_days += i }
+month - 1 == 0 ? calculated_days += day : calculated_days += months_days.take(month-1).reduce(:+) + day
 
 #####
 # Output result
 #####
 
-print "This day is #{calculated_days + day} in the year."
+print "This day is #{calculated_days} in the year."
