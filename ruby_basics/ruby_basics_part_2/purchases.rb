@@ -21,8 +21,8 @@ basket.each do |product_name, product_info|
   
   total_per_item = product_info[:price] * product_info[:quantity]
   puts "#{product_name.capitalize} - $#{product_info[:price]} - " \
-  "quantity: #{product_info[:quantity]} - " \
-  " total per item: $#{total_per_item}."
+    "quantity: #{product_info[:quantity]} - " \
+    "total per item: $#{total_per_item}."
   grand_total += total_per_item
 
 end
