@@ -1,8 +1,8 @@
 class Train
   TYPES = [ :cargo, :passenger]
 
-  attr_accessor :speed 
-  attr_reader :name, :route, :train_id, :train_length
+  attr_accessor :speed, :train_length, :route, :name
+  attr_reader :train_id, :type
 
   def initialize(type, train_length)
     @speed = 0
@@ -12,20 +12,41 @@ class Train
   end
 
   def change_train_length(choice)
-    if @speed == 0 && choice == 'add' 
-      @train_length += 1
-    elsif @speed == 0 && choice == 'remove'
-      @train_length -= 1
+    if speed == 0 && choice == 'add' 
+      self.train_length += 1
+    elsif speed == 0 && choice == 'remove'
+      self.train_length -= 1
     end 
   end
 
-  def set(route)
-    @route = route
-    @name = @route.route.first
+  def set(given_route)
+    self.route = given_route.route
+    self.name = route.first
+    Station.stations[name.downcase.to_sym].take_train(itself)
   end
 
   def move(direction)
-    if @speed > 0 && direction == 'forward' 
-    
+    Station.stations[name.downcase.to_sym].depart_train(itself)
+    if direction == 'forward'
+      self.name = status('next')
+    elsif direction == 'back'
+      self.name = status('previous')
+    end  
+    self.speed = 50
+  end 
 
+  def status(x)
+    case x
+    when 'now' 
+      if speed == 0 
+        name 
+      else
+        puts "Train is moving to #{name}"
+      end
+    when 'next'
+      route[route.index(name) + 1]
+    when 'back'
+      route[route.index(name) - 1]
+    end
+  end
 end
