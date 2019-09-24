@@ -2,7 +2,8 @@ class Station
   @@stations = {}
 
   attr_accessor :trains
-  attr_reader :name, :train_id, :type
+  attr_reader :name, :type
+
 
   def self.stations
     @@stations
@@ -23,7 +24,12 @@ class Station
   end
 
   def show_trains
-    trains.map { |i| puts "Cargo - #{i.train_id}" if i.type == :cargo }
-    trains.map { |i| puts "Passanger - #{i.train_id}" if i.type == :passenger }
+    cargo = 0
+    passenger = 0
+    trains.each do |i|
+      i.type == :cargo ? cargo += 1 : passenger += 1
+    end
+    puts "Cargo trains number = #{cargo}"
+    puts "Passenger trains number = #{passenger}"
   end
 end

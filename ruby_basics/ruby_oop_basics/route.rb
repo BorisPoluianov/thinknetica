@@ -1,6 +1,7 @@
 class Route
   attr_accessor :route
 
+
   def initialize(start, finish)
     @route = []
     @route += [start, finish]
@@ -14,7 +15,9 @@ class Route
     route.delete(name) 
   end
 
-  def route
-    @route.each { |i| puts i }
+  def to_s
+    route.each_with_index do |x, i|
+      puts "Station №#{i+1} - #{x.capitalize}"
+    end
   end
 end
