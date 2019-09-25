@@ -1,23 +1,25 @@
 class Route
-  attr_accessor :route
+  attr_reader :stations
 
 
   def initialize(start, finish)
-    @route = []
-    @route += [start, finish]
+    @stations = []
+    @start = start
+    @finish = finish 
+    @stations += [start, finish]
   end
 
   def add_station(name)
-    route.insert(-2, name) unless route.include?(name)
+    self.stations.insert(-2, name) unless stations.include?(name)
   end
 
   def delete_station(name)
-    route.delete(name) 
+    self.stations.delete(name) unless [@start, @finish].include?(name)
   end
 
   def to_s
-    route.each_with_index do |x, i|
-      puts "Station №#{i+1} - #{x.capitalize}"
+    stations.each.with_index(1) do |station, index|
+      puts "Station №#{index} - #{station.name.capitalize}"
     end
   end
 end

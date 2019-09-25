@@ -1,46 +1,60 @@
 class Train
   TYPES = [ :cargo, :passenger]
 
-  attr_accessor :speed, :train_length, :route, :name
-  attr_reader :train_id, :type
+  attr_reader :speed, :carriages_count, :current_station_index, :type
 
 
-  def initialize(type, train_length)
+  def initialize(train_id, type, carriages_count)
     @speed = 0
-    @train_id = rand(100..1000)
+    @train_id = train_id
     @type = type.to_sym if TYPES.include?(type.to_sym)
-    @train_length = train_length
+    @carriages_count = carriages_count
   end
 
-  def change_train_length(choice)
-    self.train_length += 1 if speed == 0 && choice == 'add' 
-    self.train_length -= 1 if speed == 0 && choice == 'remove'
+  def brake
+    @speed = 0
+  end
+ 
+  def add_carriage
+    @carriages_count += 1 if speed == 0
+  end
+  
+  def remove_carriage 
+    @carriages_count -= 1 if speed == 0
   end
 
-  def set(given_route)
-    self.route = given_route.route
-    self.name = route.first
-    Station.stations[name.downcase.to_sym].take_train(itself)
+  def set_route(given_route)
+    @route = given_route
+    station = @route.stations.first
+    station.take_train(self)
+    @current_station_index = 0 
   end
 
-  def move(direction)
-    direction = direction.to_sym
-    if [ :forward, :back].include? direction
-      Station.stations[name.downcase.to_sym].depart_train(self)
-      self.name = where('next') if direction == :forward
-      self.name = where('previous') if direction == :back
-      self.speed = 50
+  def current_station
+    @route.stations[current_station_index]
+  end
+
+  def next_station
+    @route.stations[current_station_index + 1] unless current_station_index + 1 == @route.stations.size
+  end
+
+  def previous_station
+    @route.stations[current_station_index - 1] unless current_station_index == 0
+  end
+
+  def move_forward
+    if next_station != nil
+      @route.stations[current_station_index].depart_train(self)
+      @route.stations[current_station_index].take_train(self)
+      @current_station_index += 1
     end
   end 
 
-  def where(x)
-    case x
-    when 'now' 
-      speed == 0 ? name : puts("Train is moving to #{name}")
-    when 'next'
-      route[route.index(name) + 1] 
-    when 'previous'
-      route[route.index(name) - 1] 
+  def move_back
+    if previous_station != nil
+      @route.stations[current_station_index].depart_train(self)
+      @route.stations[current_station_index].take_train(self)
+      @current_station_index -= 1
     end
   end
 end
