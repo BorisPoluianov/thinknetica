@@ -3,18 +3,19 @@ class Route
 
 
   def initialize(start, finish)
-    @stations = []
     @start = start
     @finish = finish 
-    @stations += [start, finish]
+    @stations = [start, finish]
   end
 
-  def add_station(name)
-    self.stations.insert(-2, name) unless stations.include?(name)
+  def add_station(station)
+    return if stations.include?(station)
+    @stations.insert(-2, station) 
   end
 
-  def delete_station(name)
-    self.stations.delete(name) unless [@start, @finish].include?(name)
+  def delete_station(station)
+    return if [@start, @finish].include?(station)
+    @stations.delete(station)
   end
 
   def to_s
