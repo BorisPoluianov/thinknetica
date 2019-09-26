@@ -16,6 +16,6 @@ class Station
   end
 
   def trains_by_type(type)
-    trains.select { |index| index.type == type.to_sym }.size
+    trains.select { |train| train.type == type.to_sym }.size
   end
 end

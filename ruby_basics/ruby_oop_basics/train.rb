@@ -14,7 +14,11 @@ class Train
   def brake
     @speed = 0
   end
- 
+
+  def speed=(value)
+    @speed = value
+  end
+
   def add_carriage
     return if speed > 0
     @carriages_count += 1
