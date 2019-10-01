@@ -1,10 +1,7 @@
-class PassengerCarriage
+class PassengerCarriage < Carriage
   TYPE = :passenger
-  TYPE.freeze
-
-  attr_reader :type
 
   def initialize
-    @type = TYPE
+    super(TYPE)
   end
 end

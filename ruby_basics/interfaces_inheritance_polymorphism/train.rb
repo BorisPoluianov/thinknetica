@@ -1,6 +1,5 @@
 class Train
-  TYPES = [:cargo, :passenger]
-  TYPES.freeze
+  TYPES = [:cargo, :passenger].freeze
 
   attr_reader :speed, :carriages, :current_station_index, :type, :train_id
 
@@ -21,7 +20,7 @@ class Train
 
   def add_carriage(carriage)
     return if speed > 0
-    @carriages.push(carriage)
+    @carriages.push(carriage) if carriage.type == self.type
   end
   
   def remove_carriage
