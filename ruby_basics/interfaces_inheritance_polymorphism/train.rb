@@ -1,8 +1,8 @@
 class Train
-  TYPES = [ :cargo, :passenger]
+  TYPES = [:cargo, :passenger]
+  TYPES.freeze
 
   attr_reader :speed, :carriages, :current_station_index, :type, :train_id
-
 
   def initialize(train_id, type)
     @speed = 0

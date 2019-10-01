@@ -7,7 +7,6 @@ require_relative './station.rb'
 require_relative './route.rb'
 
 class Main
-
   def initialize
     @all_stations = []
     @all_trains = []
@@ -16,7 +15,6 @@ class Main
 
   def run
     loop do
-      choice = 0
       output_with_title(main_menu, :main)
       choice = gets.chomp.to_i
 
@@ -157,7 +155,6 @@ class Main
     sleep 3
   end
   
-
   #####
   # Output & message methods
   #####
@@ -237,7 +234,3 @@ end
 
 railway = Main.new
 railway.run
-
-
-
-
