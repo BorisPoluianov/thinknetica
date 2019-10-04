@@ -7,10 +7,14 @@ class Station
 
   attr_reader :name, :trains
 
+  def self.all
+    @@stations
+  end
+
   def initialize(name)
     @name = name
     @trains = []
-    @@stations += [self]
+    @@stations << self
     register_instance
   end
 
