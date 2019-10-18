@@ -13,8 +13,8 @@ module Accessors
         define_method(method) { instance_variable_get("@#{method}").last }
 
         define_method("#{method}=") do |value|
-          new = (instance_variable_get('@{method}') || []) << value
-          instance_variable_set("@#{method}", new)
+          new_value = (instance_variable_get('@{method}') || []) << value
+          instance_variable_set("@#{method}", new_value)
         end
 
         define_method("#{method}_history".to_sym) do
